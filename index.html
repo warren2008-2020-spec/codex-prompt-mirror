@@ -10,56 +10,89 @@
   <main class="shell">
     <section class="hero">
       <div>
-        <p class="eyebrow">Prompt Mirror V1</p>
-        <h1>Codex 本地会话复盘</h1>
-        <p class="lede">读取本机真实会话 JSONL，汇总最近线程的提示词清晰度、扩题风险和协作复盘信号。</p>
+        <p class="eyebrow">Prompt Mirror</p>
+        <h1>哪些对话还值得继续，哪些已经开始说乱了？</h1>
+        <p class="lede">这是一个本地复盘页。它不改 Codex，不看代码质量，只帮你判断：现在该继续哪个对话，哪个最好重新说一遍，以及下一步怎么问更省力。</p>
       </div>
       <div class="hero-meta">
-        <span class="pill">Local only</span>
-        <span class="pill">Read only</span>
-        <span class="pill">Real sessions</span>
+        <span class="pill">本地读取</span>
+        <span class="pill">默认摘要</span>
+        <span class="pill">先讲人话</span>
       </div>
     </section>
 
-    <section id="status" class="status-card loading">
-      正在读取本地 Codex 会话...
-    </section>
+    <section id="status" class="status-card loading">正在读取本地会话并整理成复盘建议...</section>
 
-    <section class="stats-grid" id="overview"></section>
+    <section class="top-grid" id="overview"></section>
 
     <section class="content-grid">
       <article class="panel">
         <div class="panel-head">
           <div>
-            <p class="label">Thread Review</p>
-            <h2>最近线程</h2>
+            <p class="label">Worth Your Time</p>
+            <h2>现在最值得你看的结论</h2>
           </div>
           <span id="rootHint" class="hint"></span>
         </div>
-        <div id="threadList" class="thread-list"></div>
+        <div id="reviewCards" class="review-list"></div>
       </article>
 
       <aside class="side-stack">
-        <article class="panel">
-          <div class="panel-head">
-            <div>
-              <p class="label">Signals</p>
-              <h2>复盘信号</h2>
-            </div>
-          </div>
-          <div id="signals" class="signal-list"></div>
-        </article>
-
         <article class="panel accent-panel">
           <div class="panel-head">
             <div>
-              <p class="label">Recommended Action</p>
-              <h2>系统建议</h2>
+              <p class="label">What To Do Next</p>
+              <h2>你现在最省力的做法</h2>
             </div>
           </div>
           <div id="actionBlock" class="action-block"></div>
         </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="label">Control Range</p>
+              <h2>默认范围</h2>
+            </div>
+          </div>
+          <div class="control-list">
+            <div class="control-item">
+              <strong>读取范围</strong>
+              <p>最近一段时间的本地会话，不默认翻全部历史。</p>
+            </div>
+            <div class="control-item">
+              <strong>显示方式</strong>
+              <p>先给摘要和建议，不默认展开原始内容。</p>
+            </div>
+            <div class="control-item">
+              <strong>证据级别</strong>
+              <p>优先给摘要证据，而不是直接展示原文。</p>
+            </div>
+          </div>
+        </article>
       </aside>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="label">Patterns</p>
+            <h2>最近常见的问题</h2>
+          </div>
+        </div>
+        <div id="signals" class="signal-list"></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <p class="label">Recent Sessions</p>
+            <h2>最近读取到的有效对话</h2>
+          </div>
+        </div>
+        <div id="sessionList" class="session-list"></div>
+      </article>
     </section>
   </main>
   <script src="./app.js"></script>

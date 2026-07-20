@@ -43,6 +43,77 @@ function computeScore(messages, riskFlags) {
   return Math.max(24, Math.min(96, Math.round(score)));
 }
 
+function isTrivialSession(summary) {
+  if (!summary.userMessages.length) return true;
+  const normalizedMessages = summary.userMessages
+    .map((text) => text.trim().toLowerCase())
+    .filter(Boolean);
+  const meaningfulMessages = normalizedMessages.filter((text) => !text.startsWith('<environment_context>'));
+  const probeLikeMessages = meaningfulMessages.filter((text) =>
+    /^(hello|hi|test|ping|ok|okay|thanks|thank you)$/.test(text) ||
+    /^unexpected status\b/.test(text) ||
+    /\bunknown error\b/.test(text)
+  );
+
+  if (!meaningfulMessages.length) return true;
+
+  if (meaningfulMessages.length <= 3) {
+    const joined = meaningfulMessages.join(' ').trim();
+    if (/^(hello|hi|test|ping|ok|okay|thanks|thank you)(\s+(hello|hi|test|ping|ok|okay|thanks|thank you))*$/.test(joined)) {
+      return true;
+    }
+  }
+
+  if (meaningfulMessages.length <= 4 && probeLikeMessages.length === meaningfulMessages.length) {
+    return true;
+  }
+
+  return false;
+}
+
+function makeReason(summary) {
+  if (summary.riskFlags.includes('scope-expansion')) {
+    return '后面几轮里，这段对话开始加入新的目标，原来的重点被挤散了。';
+  }
+
+  if (summary.riskFlags.includes('repeated-questioning')) {
+    return '这段对话里出现了重复确认，说明你可能还没有把真正想做的事说稳。';
+  }
+
+  if (summary.userTurnCount >= 6) {
+    return '这段对话已经聊得比较长，但目标还算集中，值得继续往前推进。';
+  }
+
+  return '这段对话的目标相对单一，没有明显跑偏，继续推进的成本更低。';
+}
+
+function makeNextStep(summary) {
+  if (summary.riskFlags.includes('scope-expansion')) {
+    return '新开一个对话，只保留现在最想推进的那一件事，别把旁支目标一起带进去。';
+  }
+
+  if (summary.riskFlags.includes('repeated-questioning')) {
+    return '先用一句话重新说目标，再让 Codex 复述一遍它理解到的任务。';
+  }
+
+  return '继续这个对话，但下一句只补最关键的输入或验收条件，不要再扩大范围。';
+}
+
+function buildReviewCards(threads) {
+  return threads.slice(0, 3).map((thread) => {
+    const restart = thread.riskFlags.includes('scope-expansion');
+    return {
+      sessionId: thread.sessionId,
+      title: restart ? '这段对话建议重开' : '这段对话还值得继续',
+      reason: makeReason(thread),
+      nextStep: makeNextStep(thread),
+      evidencePreview: restart
+        ? '后面加入了新的目标，之后没有再稳定回到原来的重点。'
+        : '目前没有明显跑偏，内容还围着同一个方向在推进。',
+    };
+  });
+}
+
 function parseSessionFile(filePath) {
   const raw = fs.readFileSync(filePath, 'utf8');
   const lines = raw.split(/\r?\n/).filter(Boolean);
@@ -169,7 +240,9 @@ function recommendedAction(threads) {
 
 function summarizeSessions(rootPaths, limit = 24) {
   const files = scanSessionFiles(rootPaths, limit);
-  const threads = files.map(parseSessionFile);
+  const threads = files
+    .map(parseSessionFile)
+    .filter((thread) => !isTrivialSession(thread));
   const avgClarityScore = threads.length
     ? Math.round(threads.reduce((sum, thread) => sum + thread.score, 0) / threads.length)
     : 0;
@@ -183,6 +256,7 @@ function summarizeSessions(rootPaths, limit = 24) {
       recommendedAction: recommendedAction(threads),
     },
     signals: buildSignals(threads),
+    reviewCards: buildReviewCards(threads),
     threads: threads
       .sort((a, b) => {
         if (b.riskFlags.length !== a.riskFlags.length) {
