@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Demo F</title>
+  <link rel="stylesheet" href="./demo.css">
+  <style>
+    body.theme-public {
+      --accent: #2f685f;
+      --accent-soft: rgba(47, 104, 95, 0.12);
+      --good: #2d7252;
+      --warn: #ad6d1d;
+      --danger: #97423b;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.82), transparent 30%),
+        linear-gradient(145deg, #f6edde 0%, #ddd8c9 46%, #c3d6db 100%);
+    }
+
+    .hero-layout,
+    .decision-grid,
+    .proof-grid,
+    .safety-grid,
+    .footer-grid {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .hero-layout {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+
+    .decision-grid,
+    .proof-grid,
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .safety-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .soft-box,
+    .action-box,
+    .proof-box,
+    .safety-box,
+    .footer-box {
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .soft-box h3,
+    .action-box h3,
+    .proof-box h3,
+    .safety-box h3,
+    .footer-box h3 {
+      margin: 0 0 8px;
+    }
+
+    .soft-box p,
+    .action-box p,
+    .proof-box p,
+    .safety-box p,
+    .footer-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.58;
+    }
+
+    .big-copy {
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1.22;
+      margin: 10px 0 12px;
+    }
+
+    .status-row,
+    .mini-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mini-chip {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      background: rgba(28, 28, 26, 0.07);
+    }
+
+    .mini-chip.good {
+      color: var(--good);
+      background: rgba(45, 114, 82, 0.12);
+    }
+
+    .mini-chip.warn {
+      color: var(--warn);
+      background: rgba(173, 109, 29, 0.12);
+    }
+
+    .mini-chip.soft {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .prompt-box {
+      margin-top: 12px;
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: rgba(28, 28, 26, 0.07);
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    .evidence-box {
+      margin-top: 12px;
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: rgba(47, 104, 95, 0.08);
+      border: 1px solid rgba(47, 104, 95, 0.14);
+    }
+
+    .evidence-box strong,
+    .prompt-box strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .section-title {
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .hero-layout,
+      .decision-grid,
+      .proof-grid,
+      .footer-grid,
+      .safety-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-public">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Demo F</p>
+        <h1>不是“你哪里做错了”，而是“你现在怎么继续最省力”。</h1>
+        <p class="lede">这是一个面向非技术用户的公开版 demo。它不要求你懂 prompt，也不要求你懂线程管理。它只做三件事：告诉你现在该继续什么、凭什么这么判断、以及你下一句可以直接怎么说。</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">非技术用户可读</span>
+        <span class="chip">每条建议带证据</span>
+        <span class="chip good">每条建议带动作</span>
+      </div>
+    </section>
+
+    <section class="hero-layout">
+      <article class="card">
+        <p class="section-title">One-Line Review</p>
+        <div class="big-copy">你今天不是不会问，而是把“现在要做的事”和“以后也许要做的事”挤进了同一个对话里。</div>
+        <p class="lede">这类时候继续往下聊，通常不会更快。更省力的做法，是先把眼前只想推进的那件事单独拎出来。</p>
+        <div class="status-row">
+          <span class="mini-chip good">2 个对话可以继续</span>
+          <span class="mini-chip warn">2 个对话建议重开</span>
+          <span class="mini-chip soft">1 个对话可以收尾</span>
+        </div>
+      </article>
+
+      <article class="soft-box">
+        <h3>这一页为什么比“一个建议卡片”更可信</h3>
+        <p>因为它不只告诉你“该怎么办”，还会告诉你“为什么这么说”，以及“你下一句可以怎么继续”。</p>
+        <div class="mini-chip-row">
+          <span class="mini-chip soft">先给结论</span>
+          <span class="mini-chip soft">再给证据</span>
+          <span class="mini-chip soft">最后给动作</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="decision-grid">
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Continue</p>
+            <h3>这个对话还值得继续</h3>
+          </div>
+          <span class="mini-chip good">继续</span>
+        </div>
+        <p>“先做一个看得懂的 demo” 这个对话目标很单一，后面也没有明显偏题。</p>
+        <div class="evidence-box">
+          <strong>为什么这么说</strong>
+          <p>你前面几轮一直都在围绕“先让人看懂，再谈后面的功能”，没有突然切到别的目标。</p>
+        </div>
+        <div class="prompt-box"><strong>你可以直接这样继续</strong>我现在只想把这个 demo 做得更容易看懂，请先不要扩展到长期计划，只帮我决定首页最该显示哪三块内容。</div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Restart</p>
+            <h3>这个对话最好重新开始</h3>
+          </div>
+          <span class="mini-chip warn">重开</span>
+        </div>
+        <p>“报名、产品、心理、比赛全混在一起”的对话现在继续意义不大。</p>
+        <div class="evidence-box">
+          <strong>为什么这么说</strong>
+          <p>你从“做 demo”跳到了“比赛报名”，又跳到“心理层面”，后面没有再回到最初那个单一目标。</p>
+        </div>
+        <div class="prompt-box"><strong>你可以直接这样重开</strong>我现在只想推进产品页面本身，请先不要讨论报名、长期规划或心理话题，只帮我把这个 demo 的结构做清楚。</div>
+      </article>
+    </section>
+
+    <section class="proof-grid">
+      <article class="soft-box">
+        <h3>没有证据的建议，小白不会信</h3>
+        <p>所以这类产品不能只说“你现在说乱了”。它必须至少说明：你在哪里开始混目标、什么时候开始补范围、为什么建议你重开。</p>
+      </article>
+      <article class="soft-box">
+        <h3>没有动作出口的证据，也没有价值</h3>
+        <p>如果看完只能点头，却不知道下一句怎么问，那它还是一个漂亮模板，不是一个真正有用的产品。</p>
+      </article>
+    </section>
+
+    <section class="safety-grid">
+      <article class="safety-box">
+        <h3>读取范围</h3>
+        <p>默认最近 7 天，不默认翻全部历史。</p>
+      </article>
+      <article class="safety-box">
+        <h3>排除机制</h3>
+        <p>测试对话、超短对话、探测型会话默认跳过。</p>
+      </article>
+      <article class="safety-box">
+        <h3>显示方式</h3>
+        <p>默认只给摘要，不默认摊开原始内容。</p>
+      </article>
+      <article class="safety-box">
+        <h3>证据级别</h3>
+        <p>默认摘要证据，只有用户主动开，才显示更多细节。</p>
+      </article>
+    </section>
+
+    <section class="footer-grid">
+      <article class="footer-box">
+        <h3>它不是另一个聊天管理器</h3>
+        <p>它不负责替你整理项目，也不负责替你审代码。它只负责提醒你：哪些对话已经不值得继续投入时间。</p>
+      </article>
+      <article class="footer-box">
+        <h3>它真正卖的是什么</h3>
+        <p>不是“分析能力”，而是“带证据的继续建议”和“带动作的重开建议”。这才是普通人愿意回来用的原因。</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

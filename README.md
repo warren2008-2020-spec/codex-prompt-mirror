@@ -45,6 +45,8 @@ Prompt Mirror is not:
 
 These demo pages are mockups for product direction, not claims of finished behavior:
 
+- `demo-f.html`
+  Public-facing combined demo: simple language, evidence previews, and next-step actions
 - `demo-d.html`
   Beginner-friendly reflection page
 - `demo-e.html`
