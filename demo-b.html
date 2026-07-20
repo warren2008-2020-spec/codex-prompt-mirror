@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Demo B</title>
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body class="theme-reflect">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Demo B</p>
+        <h1>个人复盘仪表盘</h1>
+        <p class="lede">偏个人回顾视角。先看今天、这一周、这个月你的协作节奏，再看哪些 prompt 习惯正在变好或变乱。</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">Daily Review</span>
+        <span class="chip">Weekly Review</span>
+        <span class="chip">Monthly Review</span>
+      </div>
+    </section>
+
+    <section class="panel split-hero">
+      <div class="card diary-card">
+        <p class="label">Today</p>
+        <h3>今天的协作状态</h3>
+        <div class="mood-ring">
+          <div>
+            <strong>72</strong>
+            <span>稳定推进</span>
+          </div>
+        </div>
+        <ul class="timeline-notes">
+          <li>09:00-12:00 的 prompt 更聚焦，多为“先定边界再执行”。</li>
+          <li>14:00 之后开始频繁切换话题，新增 4 个侧线程。</li>
+          <li>晚上出现“先做再说”倾向，验证条件减少。</li>
+        </ul>
+      </div>
+
+      <div class="card review-card">
+        <p class="label">Weekly Pattern</p>
+        <h3>最近 7 天的协作变化</h3>
+        <div class="wave">
+          <span class="dot d1"></span>
+          <span class="dot d2"></span>
+          <span class="dot d3"></span>
+          <span class="dot d4"></span>
+          <span class="dot d5"></span>
+          <span class="dot d6"></span>
+          <span class="dot d7"></span>
+        </div>
+        <div class="review-summary">
+          <p><strong>变好：</strong>先问“和官方功能是否对冲”之后，再推进产品定义，明显减少了空转。</p>
+          <p><strong>变乱：</strong>一旦灵感扩展到大会、心理学、AI 共生叙事，线程会快速膨胀。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid alt">
+      <article class="stat-card">
+        <p class="label">本周最佳习惯</p>
+        <h2>先收边界</h2>
+        <p>先确认不和官方对冲，再定义方案，成功率最高。</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">本周高风险习惯</p>
+        <h2>连续扩题</h2>
+        <p>同一线程里连续引入报名、产品、心理、比赛策略，容易失焦。</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">本月提示词趋势</p>
+        <h2>更直接</h2>
+        <p>命令式表达变多，追求结果更明确，但容错空间更小。</p>
+      </article>
+    </section>
+
+    <section class="panel two-col">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Reflection Feed</p>
+            <h3>周期复盘摘要</h3>
+          </div>
+        </div>
+        <div class="journal-feed">
+          <article>
+            <span>Daily</span>
+            <h4>今天最有效的 prompt 结构</h4>
+            <p>“先判断边界，再给方案”这一结构最稳，尤其适合产品定义和比赛方向决策。</p>
+          </article>
+          <article>
+            <span>Weekly</span>
+            <h4>这一周的主要返工来源</h4>
+            <p>没有先区分“想法讨论”和“正式落地”，导致早期原型被判定过于简单。</p>
+          </article>
+          <article>
+            <span>Monthly</span>
+            <h4>长期变化</h4>
+            <p>你越来越倾向把 Codex 当协作者而不是单点工具，这提升了产品讨论质量，但也更需要线程治理。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Coach Notes</p>
+            <h3>下一步调整建议</h3>
+          </div>
+        </div>
+        <div class="coach-stack">
+          <div class="coach-note">
+            <h4>明天上午优先做结构化任务</h4>
+            <p>你上午处理“先定义、后执行”的任务表现更稳定，适合推进第一版规格和数据模型。</p>
+          </div>
+          <div class="coach-note">
+            <h4>把大会叙事放到单独灵感池</h4>
+            <p>高层叙事很有价值，但不应持续侵入当前交付线程，否则会让实施目标发散。</p>
+          </div>
+          <div class="coach-note">
+            <h4>把 cron 反馈限定成摘要，不做打断</h4>
+            <p>日/周/月复盘适合异步给出，不适合在主线程里实时干预。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

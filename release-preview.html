@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Release Preview</title>
+  <link rel="stylesheet" href="./demo.css">
+  <style>
+    body.release {
+      --accent: #2c685f;
+      --accent-soft: rgba(44, 104, 95, 0.12);
+      --good: #2d7252;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.82), transparent 28%),
+        linear-gradient(145deg, #f5ecde 0%, #ddd7c8 48%, #bfd4d8 100%);
+    }
+
+    .grid,
+    .demo-grid,
+    .release-notes {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      grid-template-columns: 1.08fr 0.92fr;
+    }
+
+    .demo-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .release-notes {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .box {
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.72);
+    }
+
+    .box h3,
+    .box h4 {
+      margin: 0 0 8px;
+    }
+
+    .box p,
+    .box li {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid rgba(44, 104, 95, 0.16);
+      font-weight: 600;
+    }
+
+    .big-copy {
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.25;
+      margin: 10px 0 12px;
+    }
+
+    @media (max-width: 980px) {
+      .grid,
+      .demo-grid,
+      .release-notes {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="release">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Release Preview</p>
+        <h1>Prompt Mirror</h1>
+        <p class="lede">A local-first reflection layer for heavy Codex users. It helps people review how they are working with Codex, not just what Codex produced.</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">local first</span>
+        <span class="chip">read only</span>
+        <span class="chip good">non-technical language</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <p class="label">Core Idea</p>
+        <div class="big-copy">You can review code, tasks, and outputs. Prompt Mirror reviews whether your Codex conversations are still helping you move forward.</div>
+        <p class="lede">The product is meant for people who open many Codex conversations, lose track of which one is still useful, and want practical guidance on what to continue, restart, or stop.</p>
+        <div class="cta-row">
+          <a class="cta" href="./demo-d.html">Open Beginner Demo</a>
+          <a class="cta" href="./demo-e.html">Open Safety Demo</a>
+        </div>
+      </article>
+
+      <article class="box">
+        <h3>Public release bar</h3>
+        <ul>
+          <li>Readable by non-technical users</li>
+          <li>Every recommendation has evidence</li>
+          <li>Every piece of evidence leads to an action</li>
+          <li>Safe defaults come before deeper inspection</li>
+          <li>No dependence on modifying Codex UI</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="demo-grid">
+      <article class="box">
+        <h4>Demo D</h4>
+        <p>Shows the beginner-facing product language: simple recommendations, clear next steps, and no internal jargon.</p>
+      </article>
+      <article class="box">
+        <h4>Demo E</h4>
+        <p>Shows the control model: what can be read, what can be excluded, what gets summarized, and how evidence is gated.</p>
+      </article>
+    </section>
+
+    <section class="release-notes">
+      <article class="box">
+        <h4>Not a Codex fork</h4>
+        <p>Prompt Mirror is meant to sit next to Codex, not inside its UI surface.</p>
+      </article>
+      <article class="box">
+        <h4>Not another code review tool</h4>
+        <p>The value is in conversation reflection and restart guidance, not code analysis.</p>
+      </article>
+      <article class="box">
+        <h4>Not cloud-first</h4>
+        <p>The intended trust model is local, user-controlled, and conservative by default.</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

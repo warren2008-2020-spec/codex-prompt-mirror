@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Demo E</title>
+  <link rel="stylesheet" href="./demo.css">
+  <style>
+    body.theme-control {
+      --accent: #2f685f;
+      --accent-soft: rgba(47, 104, 95, 0.12);
+      --good: #2d7252;
+      --warn: #ad6d1d;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.8), transparent 30%),
+        linear-gradient(145deg, #f6eddf 0%, #ddd8c9 48%, #c7d7dc 100%);
+    }
+
+    .layout,
+    .summary-grid,
+    .evidence-grid {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .layout {
+      grid-template-columns: 0.92fr 1.08fr;
+    }
+
+    .summary-grid,
+    .evidence-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .control-stack,
+    .note-stack,
+    .sample-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .control-card,
+    .sample-card,
+    .note-card {
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .control-card h4,
+    .sample-card h4,
+    .note-card h4 {
+      margin: 0 0 8px;
+    }
+
+    .control-card p,
+    .sample-card p,
+    .note-card p,
+    .micro-copy {
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .option-row,
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .option {
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 13px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.92);
+    }
+
+    .option.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-color: rgba(47, 104, 95, 0.18);
+    }
+
+    .option.soft {
+      color: var(--muted);
+    }
+
+    .hero-state {
+      font-size: clamp(32px, 6vw, 68px);
+      line-height: 1;
+      margin: 10px 0 12px;
+    }
+
+    .callout {
+      border-radius: 22px;
+      padding: 22px;
+      background:
+        linear-gradient(180deg, rgba(47,104,95,0.08), rgba(255,255,255,0.82)),
+        rgba(255,255,255,0.82);
+      border: 1px solid rgba(255,255,255,0.75);
+      box-shadow: var(--shadow);
+    }
+
+    .callout h3 {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 4vw, 34px);
+      line-height: 1.25;
+    }
+
+    .safety-box {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid var(--line);
+    }
+
+    .safety-box strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .mini-title {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .code-pill {
+      display: inline-block;
+      margin-top: 10px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      background: rgba(28, 28, 26, 0.07);
+      font-family: Consolas, monospace;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .layout,
+      .summary-grid,
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-control">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Demo E</p>
+        <h1>你来决定它看什么，显示到什么程度</h1>
+        <p class="lede">这一版不先谈分析多聪明，而是先把用户能控制的范围讲清楚：读哪些、不读哪些、只看摘要还是看细节、要不要看证据。</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">默认安全</span>
+        <span class="chip">默认摘要</span>
+        <span class="chip good">用户自己开</span>
+      </div>
+    </section>
+
+    <section class="layout">
+      <article class="card">
+        <p class="label">Default Setup</p>
+        <div class="hero-state">保守</div>
+        <p class="micro-copy">默认状态下，它不会多读，也不会多显。先让用户觉得安全，再让用户决定要不要看更多。</p>
+
+        <div class="control-stack" style="margin-top:16px;">
+          <div class="control-card">
+            <div class="mini-title">1. 读取范围</div>
+            <h4>最近 7 天</h4>
+            <p>先从最近的工作状态开始，不默认翻很久以前的历史。</p>
+            <div class="option-row">
+              <span class="option soft">最近 3 天</span>
+              <span class="option active">最近 7 天</span>
+              <span class="option soft">最近 30 天</span>
+              <span class="option soft">只看我勾选的</span>
+            </div>
+          </div>
+
+          <div class="control-card">
+            <div class="mini-title">2. 不读哪些对话</div>
+            <h4>自动跳过测试对话</h4>
+            <p>明显太短、只有一句话、像测试用的内容，默认不进入复盘。</p>
+            <div class="option-row">
+              <span class="option active">自动跳过短对话</span>
+              <span class="option active">允许手动排除</span>
+              <span class="option soft">永不读取名单</span>
+            </div>
+          </div>
+
+          <div class="control-card">
+            <div class="mini-title">3. 显示方式</div>
+            <h4>先只看摘要</h4>
+            <p>先给结论、原因和建议动作，不把用户直接扔进原始内容里。</p>
+            <div class="option-row">
+              <span class="option active">只看摘要</span>
+              <span class="option soft">展开看细节</span>
+            </div>
+          </div>
+
+          <div class="control-card">
+            <div class="mini-title">4. 证据显示级别</div>
+            <h4>摘要证据</h4>
+            <p>既让建议有依据，又不直接暴露原文。</p>
+            <div class="option-row">
+              <span class="option soft">关闭证据</span>
+              <span class="option active">摘要证据</span>
+              <span class="option soft">原文片段</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div class="callout">
+        <p class="label">Why This Matters</p>
+        <h3>小白不是不愿意复盘，而是不想被“读太多、看太多、暴露太多”。</h3>
+        <p class="micro-copy">所以第一步不是证明你分析得多厉害，而是让用户知道：你不会乱翻他的内容，也不会把原话直接摊开来。</p>
+
+        <div class="safety-box">
+          <strong>默认安全配置</strong>
+          <p>最近 7 天 + 自动跳过测试对话 + 只看摘要 + 摘要证据</p>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip good">先给结论</span>
+          <span class="chip">再给简短证据</span>
+          <span class="chip accent">最后才允许看更多</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="summary-grid">
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">What The User Sees</p>
+            <h3>默认看到的样子</h3>
+          </div>
+        </div>
+        <div class="sample-stack">
+          <div class="sample-card">
+            <h4>这个对话建议重新开始</h4>
+            <p>你后面连续加了两个新目标，所以现在继续聊，不一定会更顺。</p>
+          </div>
+          <div class="sample-card">
+            <h4>这个对话还值得继续</h4>
+            <p>它的目标一直比较单一，你只需要把下一步说得更具体一点。</p>
+          </div>
+          <div class="sample-card">
+            <h4>你今天最容易说散的地方</h4>
+            <p>你把“现在要做的事”和“以后也许要做的事”放进了同一个对话里。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Why It Feels Safer</p>
+            <h3>为什么不会吓到人</h3>
+          </div>
+        </div>
+        <div class="note-stack">
+          <div class="note-card">
+            <h4>不会默认显示原话</h4>
+            <p>用户先看到的是“发生了什么”，不是“你刚才具体说了什么”。</p>
+          </div>
+          <div class="note-card">
+            <h4>不会默认把全部历史都翻出来</h4>
+            <p>先看最近一段时间，范围小，负担小，也更符合复盘习惯。</p>
+          </div>
+          <div class="note-card">
+            <h4>随时可以缩回摘要模式</h4>
+            <p>用户不需要每次都面对完整证据，只在想确认的时候再展开。</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="evidence-grid">
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Evidence Preview</p>
+            <h3>摘要证据长什么样</h3>
+          </div>
+        </div>
+        <div class="sample-card">
+          <p class="micro-copy">不是原文复读，而是脱敏后的说明：</p>
+          <div class="code-pill">你在第 5 轮把“做 demo”扩展到了另一个主题，之后没有再回到原目标。</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Next Action</p>
+            <h3>有控制才敢继续用</h3>
+          </div>
+        </div>
+        <div class="sample-card">
+          <h4>如果用户想看更多</h4>
+          <p>他可以主动把证据从“摘要证据”切到“原文片段”。不是系统默认展开，而是用户自己决定。</p>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Demo C</title>
+  <link rel="stylesheet" href="./demo.css">
+  <style>
+    body.theme-human {
+      --accent: #2b6d66;
+      --accent-soft: rgba(43, 109, 102, 0.12);
+      --good: #2f7557;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.72), transparent 32%),
+        linear-gradient(145deg, #f5ebdc 0%, #d9d6cd 44%, #bfd4d8 100%);
+    }
+
+    .daily-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .plain-list,
+    .gentle-stack,
+    .continue-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .plain-item,
+    .gentle-note,
+    .continue-card {
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .plain-item h4,
+    .gentle-note h4,
+    .continue-card h4 {
+      margin-bottom: 8px;
+    }
+
+    .plain-item p,
+    .gentle-note p,
+    .continue-card p,
+    .tone-copy {
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .mosaic .card {
+      min-height: 160px;
+    }
+
+    .state-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .state-pill {
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      background: rgba(28, 28, 26, 0.07);
+    }
+
+    .state-pill.good {
+      background: rgba(47, 117, 87, 0.12);
+      color: var(--good);
+    }
+
+    .state-pill.warn {
+      background: rgba(181, 117, 29, 0.12);
+      color: var(--warn);
+    }
+
+    .state-pill.soft {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .big-number {
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: 1;
+      margin: 10px 0 12px;
+    }
+
+    .tiny-label {
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .daily-grid,
+      .mosaic {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-human">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Demo C</p>
+        <h1>今天你和 Codex 配合得怎么样？</h1>
+        <p class="lede">不是看代码，也不是看技术指标。它只回答几件普通人真的关心的事：哪些对话还值得继续、哪些已经说乱了、你什么时候最容易把事情讲清楚。</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">默认本地</span>
+        <span class="chip">默认脱敏</span>
+        <span class="chip good">先讲人话</span>
+      </div>
+    </section>
+
+    <section class="daily-grid">
+      <article class="card">
+        <p class="label">Today</p>
+        <div class="big-number">6</div>
+        <p class="tone-copy">你今天一共开了 6 个对话。里面有 2 个还值得继续，2 个其实已经开始说散了，另外 2 个更像临时想法，不需要现在继续追。</p>
+        <div class="state-pill-row">
+          <span class="state-pill good">2 个可以继续</span>
+          <span class="state-pill warn">2 个建议重开</span>
+          <span class="state-pill soft">2 个先放一放</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="label">One Line Review</p>
+        <h3>今天的问题不是你不懂，而是你有点把几个目标混在一起说了。</h3>
+        <p class="tone-copy">如果现在还要继续，最有帮助的不是补更多要求，而是先用一句话把你最想让 Codex 完成的那件事定下来。</p>
+      </article>
+    </section>
+
+    <section class="panel two-col">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Keep Going</p>
+            <h3>还值得继续的对话</h3>
+          </div>
+          <span class="chip good">先看这两个</span>
+        </div>
+        <div class="continue-list">
+          <article class="continue-card">
+            <div class="tiny-label">可以继续</div>
+            <h4>“直接读取本地 Codex 会话数据”</h4>
+            <p>这个目标本身是清楚的：先读本地会话，再做复盘。它的问题不大，主要是后来被别的话题带偏了。</p>
+          </article>
+          <article class="continue-card">
+            <div class="tiny-label">可以继续</div>
+            <h4>“不和官方功能对冲”</h4>
+            <p>这个方向很关键，而且判断标准清楚。它适合继续保留，作为你后续每个功能取舍的底线。</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Slow Down</p>
+            <h3>已经开始说乱的地方</h3>
+          </div>
+          <span class="chip warn">不是批评，是提醒</span>
+        </div>
+        <div class="plain-list">
+          <article class="plain-item">
+            <h4>你把“报名参赛”和“做产品”混在了一起</h4>
+            <p>这两个目标都重要，但放在一个对话里会互相打断。一个是策略问题，一个是交付问题，最好拆开。</p>
+          </article>
+          <article class="plain-item">
+            <h4>你后面几次补充，更多是在加范围，不是在加清晰度</h4>
+            <p>这类时候，继续聊通常不会更顺，反而更容易让 Codex 误解你的重点。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mosaic">
+      <article class="card">
+        <p class="label">When You Were Clear</p>
+        <h3>你讲得最清楚的时候</h3>
+        <p class="tone-copy">当你先问“这个会不会和官方功能冲突”时，对话一下就清楚了。因为那时你先定了边界，再继续往下走。</p>
+      </article>
+
+      <article class="card">
+        <p class="label">When It Drifted</p>
+        <h3>你最容易说散的时候</h3>
+        <p class="tone-copy">当一个想法同时牵扯比赛、产品、心理、人机关系时，你会很快从一个问题跳到另一个问题，目标会变得不稳定。</p>
+      </article>
+
+      <article class="card">
+        <p class="label">What To Do Next</p>
+        <h3>下一步最有用的动作</h3>
+        <p class="tone-copy">把今天真正要推进的事缩成一句话，然后只围着这句话继续一个对话，其他灵感放到旁边，别同时推进。</p>
+      </article>
+    </section>
+
+    <section class="panel single">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Why This Version</p>
+            <h3>这一版为什么更适合发 GitHub</h3>
+          </div>
+        </div>
+        <div class="gentle-stack">
+          <div class="gentle-note">
+            <h4>它先讲感受和处境，不先讲技术结构</h4>
+            <p>别人点进来先看到“哪些对话还值得继续”，而不是 `thread id`、`scope drift` 这种内部词。</p>
+          </div>
+          <div class="gentle-note">
+            <h4>它默认站在用户这一边，而不是站在系统这一边</h4>
+            <p>不是告诉你“你有风险标签”，而是告诉你“你现在更需要收一下目标”。</p>
+          </div>
+          <div class="gentle-note">
+            <h4>它更不容易和 Codex 官方能力撞车</h4>
+            <p>它不是另一个聊天管理器，也不是代码 review。它更像是一个“使用 Codex 之后的复盘层”。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

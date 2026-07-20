@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Demo A</title>
+  <link rel="stylesheet" href="./demo.css">
+</head>
+<body class="theme-ops">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Demo A</p>
+        <h1>多线程管理面板</h1>
+        <p class="lede">偏管理视角。先看线程健康度、重复探索、返工风险，再决定今天该继续哪个任务。</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">12 个活跃线程</span>
+        <span class="chip warn">3 个疑似漂移</span>
+        <span class="chip good">2 个可归档</span>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <p class="label">Prompt Clarity</p>
+        <h2>78</h2>
+        <p>最近 24 小时平均分，较昨日 +6</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">Scope Drift</p>
+        <h2>3</h2>
+        <p>3 个线程在连续追加约束</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">Duplicate Work</p>
+        <h2>2</h2>
+        <p>2 组线程主题接近，建议合并</p>
+      </article>
+      <article class="stat-card">
+        <p class="label">Execution Readiness</p>
+        <h2>5</h2>
+        <p>5 个线程已具备清晰目标和验收条件</p>
+      </article>
+    </section>
+
+    <section class="panel two-col">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Thread Queue</p>
+            <h3>线程复查列表</h3>
+          </div>
+          <span class="chip">按风险排序</span>
+        </div>
+
+        <div class="thread-list">
+          <article class="thread-item danger">
+            <div>
+              <h4>Prompt Mirror 数据接入</h4>
+              <p>过去 2 小时内追加 5 次限制条件，目标从“读取本地会话”扩展到“cron + 仪表盘 + AI 反向学习”。</p>
+            </div>
+            <div class="score-block">
+              <strong>52</strong>
+              <span>建议重述</span>
+            </div>
+          </article>
+
+          <article class="thread-item warn">
+            <div>
+              <h4>Build Week 资格判断</h4>
+              <p>讨论方向清楚，但跨越报名、资格、产品定位 3 个目标，适合拆分。</p>
+            </div>
+            <div class="score-block">
+              <strong>68</strong>
+              <span>建议 fork</span>
+            </div>
+          </article>
+
+          <article class="thread-item good">
+            <div>
+              <h4>codex-pr-reviewer README</h4>
+              <p>目标明确、输入输出固定、验收路径清楚，可直接执行。</p>
+            </div>
+            <div class="score-block">
+              <strong>89</strong>
+              <span>可推进</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Signals</p>
+            <h3>今天最值得注意的模式</h3>
+          </div>
+        </div>
+
+        <ul class="signal-list">
+          <li>
+            <strong>重复探索</strong>
+            <p>“参赛方向”在 4 个线程里反复出现，建议收敛到 1 个主线程。</p>
+          </li>
+          <li>
+            <strong>目标后移</strong>
+            <p>3 个线程先开始实现，后补产品定义，返工风险明显升高。</p>
+          </li>
+          <li>
+            <strong>夜间扩 scope</strong>
+            <p>22:00 之后的新线程更容易把单点问题扩成平台级需求。</p>
+          </li>
+        </ul>
+
+        <div class="mini-chart">
+          <div class="bar h72"><span>周一</span></div>
+          <div class="bar h60"><span>周二</span></div>
+          <div class="bar h84"><span>周三</span></div>
+          <div class="bar h58"><span>周四</span></div>
+          <div class="bar h76"><span>周五</span></div>
+          <div class="bar h64"><span>周六</span></div>
+          <div class="bar h88"><span>周日</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel single">
+      <div class="card focus-card">
+        <div class="card-head">
+          <div>
+            <p class="label">Action Review</p>
+            <h3>系统建议</h3>
+          </div>
+          <span class="chip accent">现在该做什么</span>
+        </div>
+        <div class="action-grid">
+          <div>
+            <h4>1. 先冻结今天的主目标</h4>
+            <p>把“Prompt Mirror 第一版”单独作为一个主线程，其他与报名、旧仓库、资格相关的讨论移到侧线程。</p>
+          </div>
+          <div>
+            <h4>2. 对高漂移线程执行重开</h4>
+            <p>当前数据接入线程建议新开，并把目标固定为“只读取本地 Codex 会话 JSONL”。</p>
+          </div>
+          <div>
+            <h4>3. 保留一个高质量模板</h4>
+            <p>从得分最高的线程中抽取 prompt 模板，作为后续产品设计类任务的默认起手式。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

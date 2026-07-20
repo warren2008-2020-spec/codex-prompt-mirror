@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prompt Mirror Demo D</title>
+  <link rel="stylesheet" href="./demo.css">
+  <style>
+    body.theme-beginner {
+      --accent: #3b6f5d;
+      --accent-soft: rgba(59, 111, 93, 0.12);
+      --good: #2d7252;
+      --warn: #ad6d1d;
+      --danger: #97423b;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.78), transparent 30%),
+        linear-gradient(140deg, #f7efe2 0%, #e3dbc9 48%, #c8d9db 100%);
+    }
+
+    .welcome-grid,
+    .focus-grid,
+    .bottom-grid {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .welcome-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .focus-grid,
+    .bottom-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .soft-card {
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--line);
+    }
+
+    .soft-card h3,
+    .simple-item h4,
+    .step-card h4 {
+      margin-bottom: 8px;
+    }
+
+    .gentle-text,
+    .simple-item p,
+    .step-card p,
+    .plain-tip p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .status-big {
+      font-size: clamp(40px, 7vw, 82px);
+      line-height: 0.95;
+      margin: 10px 0 12px;
+    }
+
+    .mini-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .mini-status span {
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 13px;
+      background: rgba(30, 30, 28, 0.07);
+    }
+
+    .mini-status .good {
+      color: var(--good);
+      background: rgba(45, 114, 82, 0.12);
+    }
+
+    .mini-status .warn {
+      color: var(--warn);
+      background: rgba(173, 109, 29, 0.12);
+    }
+
+    .mini-status .soft {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .simple-list,
+    .step-list,
+    .tip-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .simple-item,
+    .step-card,
+    .plain-tip {
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .step-card strong {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .one-line {
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.25;
+    }
+
+    .tiny-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .welcome-grid,
+      .focus-grid,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="theme-beginner">
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Demo D</p>
+        <h1>你现在和 Codex 聊得顺不顺？</h1>
+        <p class="lede">这是给不懂技术的人看的复盘页。它不看代码，不讲术语，只帮你看清三件事：现在有没有说清楚、哪些对话还值得继续、下一步怎么问会更省力。</p>
+      </div>
+      <div class="hero-chip-row">
+        <span class="chip accent">不讲技术词</span>
+        <span class="chip">打开就能看懂</span>
+        <span class="chip good">建议能立刻用</span>
+      </div>
+    </section>
+
+    <section class="welcome-grid">
+      <article class="card">
+        <p class="label">Today</p>
+        <div class="status-big">还行</div>
+        <p class="gentle-text">你今天不是完全说乱了，但已经有一点开始把几件事混在一起说。现在最需要的不是补更多内容，而是先把最想完成的那件事单独拎出来。</p>
+        <div class="mini-status">
+          <span class="good">2 个对话可以继续</span>
+          <span class="warn">2 个对话建议重开</span>
+          <span class="soft">1 个对话其实可以收尾</span>
+        </div>
+      </article>
+
+      <article class="soft-card">
+        <p class="label">一句提醒</p>
+        <h3 class="one-line">你今天的问题，不是不会问，而是把两个目标挤进了同一个对话里。</h3>
+        <p class="tiny-note">这类时候继续聊，通常不会更快，反而更容易越说越散。</p>
+      </article>
+    </section>
+
+    <section class="focus-grid">
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Worth Continuing</p>
+            <h3>现在还值得继续的对话</h3>
+          </div>
+        </div>
+        <div class="simple-list">
+          <div class="simple-item">
+            <h4>“先做一个看得懂的 demo”</h4>
+            <p>这个方向是清楚的，因为目标很单一：先让人看懂，再谈后面的功能。</p>
+          </div>
+          <div class="simple-item">
+            <h4>“不要和官方功能撞上”</h4>
+            <p>这个对话有价值，因为它在帮你定边界。只要边界清楚，后面的东西才不会白做。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Worth Restarting</p>
+            <h3>最好重新说一遍的对话</h3>
+          </div>
+        </div>
+        <div class="simple-list">
+          <div class="simple-item">
+            <h4>“报名、产品、心理、比赛全混在一起”</h4>
+            <p>不是这个话题不重要，而是它现在装了太多东西。重开一个只谈产品的对话，会更轻松。</p>
+          </div>
+          <div class="simple-item">
+            <h4>“已经补了很多要求的那个对话”</h4>
+            <p>后面补进去的多半是范围，不是清晰度。继续在原地补，往往不如重新讲一遍。</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">Next Step</p>
+            <h3>你现在最省力的做法</h3>
+          </div>
+        </div>
+        <div class="step-list">
+          <div class="step-card">
+            <strong>Step 1</strong>
+            <h4>先只留一个主问题</h4>
+            <p>把“你最想让 Codex 现在帮你做的事”压成一句话，其它想法先放旁边。</p>
+          </div>
+          <div class="step-card">
+            <strong>Step 2</strong>
+            <h4>不要继续往旧对话里加东西</h4>
+            <p>如果已经加了很多新要求，就别再补了，重新开一个更省时间。</p>
+          </div>
+          <div class="step-card">
+            <strong>Step 3</strong>
+            <h4>先问“你理解的是不是这个”</h4>
+            <p>这样可以先对齐，再开工，能少很多返工。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-head">
+          <div>
+            <p class="label">What This Helps With</p>
+            <h3>它到底帮你省了什么</h3>
+          </div>
+        </div>
+        <div class="tip-list">
+          <div class="plain-tip">
+            <h4>不用自己翻一堆对话找重点</h4>
+            <p>它直接告诉你哪些还值得继续，哪些已经没必要再聊下去了。</p>
+          </div>
+          <div class="plain-tip">
+            <h4>不用自己猜是 Codex 不行，还是自己没说清楚</h4>
+            <p>它会把“哪里开始说散了”直接点出来。</p>
+          </div>
+          <div class="plain-tip">
+            <h4>不用每次都从头学怎么问</h4>
+            <p>它会慢慢帮你找到你最顺手、最不费劲的表达方式。</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

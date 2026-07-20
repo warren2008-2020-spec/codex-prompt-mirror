@@ -1,0 +1,291 @@
+:root {
+  --bg: #ece4d5;
+  --panel: rgba(255, 252, 245, 0.9);
+  --line: rgba(41, 34, 28, 0.12);
+  --text: #1f1c19;
+  --muted: #68615a;
+  --accent: #9f4328;
+  --accent-soft: rgba(159, 67, 40, 0.12);
+  --good: #2d7252;
+  --warn: #a56b1c;
+  --danger: #973d35;
+  --shadow: 0 20px 50px rgba(53, 35, 20, 0.12);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.72), transparent 32%),
+    linear-gradient(135deg, #ede3d3 0%, #ddd2bd 48%, #bccfd7 100%);
+}
+
+.shell {
+  width: min(1240px, calc(100vw - 32px));
+  margin: 24px auto 40px;
+}
+
+.hero,
+.panel,
+.stat-card,
+.status-card {
+  background: var(--panel);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.hero {
+  border-radius: 30px;
+  padding: 28px 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.eyebrow,
+.label {
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, 54px);
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+.lede {
+  max-width: 760px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.pill,
+.mini-pill {
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  background: rgba(31, 28, 25, 0.07);
+}
+
+.mini-pill.neutral {
+  color: var(--muted);
+}
+
+.status-card {
+  margin: 18px 0;
+  border-radius: 20px;
+  padding: 16px 18px;
+  font-size: 15px;
+}
+
+.status-card.loading {
+  color: var(--muted);
+}
+
+.status-card.ready {
+  color: var(--good);
+}
+
+.status-card.error {
+  color: var(--danger);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.stat-card,
+.panel {
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.stat-card h3 {
+  font-size: 42px;
+  margin-bottom: 8px;
+}
+
+.stat-card p:last-child {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.9fr;
+  gap: 16px;
+}
+
+.side-stack {
+  display: grid;
+  gap: 16px;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 12px;
+  max-width: 300px;
+  text-align: right;
+  line-height: 1.4;
+}
+
+.thread-list,
+.signal-list {
+  display: grid;
+  gap: 14px;
+}
+
+.thread-item {
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.7);
+  padding: 16px;
+}
+
+.thread-item.good {
+  border-left: 6px solid var(--good);
+}
+
+.thread-item.warn {
+  border-left: 6px solid var(--warn);
+}
+
+.thread-item.danger {
+  border-left: 6px solid var(--danger);
+}
+
+.thread-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.subtle,
+.thread-meta,
+.signal-item p,
+.thread-prompt,
+.empty,
+.action-block {
+  color: var(--muted);
+}
+
+.thread-prompt {
+  line-height: 1.55;
+  margin-bottom: 12px;
+}
+
+.thread-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.flag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.score-box {
+  min-width: 72px;
+  text-align: right;
+}
+
+.score-box strong {
+  display: block;
+  font-size: 28px;
+}
+
+.score-box span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.signal-item {
+  border-radius: 18px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.68);
+}
+
+.signal-item h3 {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.accent-panel {
+  background:
+    linear-gradient(180deg, rgba(159,67,40,0.08), rgba(255,252,245,0.92)),
+    var(--panel);
+}
+
+.action-block {
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+.empty {
+  line-height: 1.6;
+}
+
+@media (max-width: 980px) {
+  .hero,
+  .content-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+    display: grid;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-meta {
+    justify-content: flex-start;
+  }
+
+  .hint {
+    text-align: left;
+    max-width: none;
+  }
+}
